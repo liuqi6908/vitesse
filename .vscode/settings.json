@@ -1,0 +1,48 @@
+{
+  "cSpell.words": [
+    "aggs",
+    "antfu",
+    "arta",
+    "Attributify",
+    "autoresize",
+    "blueimp",
+    "composables",
+    "customfav",
+    "demi",
+    "execa",
+    "iconify",
+    "intlify",
+    "ISNOTNULL",
+    "minio",
+    "NOTEXISTS",
+    "NOTHAS",
+    "NOTIN",
+    "NOTLIKE",
+    "nprogress",
+    "papaparse",
+    "pinia",
+    "pnpm",
+    "PSWD",
+    "QRCODE",
+    "sizecheck",
+    "Streamable",
+    "taze",
+    "unhead",
+    "unocss",
+    "unplugin",
+    "Vite",
+    "vitejs",
+    "vitepress",
+    "Vitesse",
+    "vitest",
+    "vueuse"
+  ],
+  "prettier.enable": false,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "files.associations": {
+    "*.css": "postcss"
+  },
+  "editor.formatOnSave": true
+}

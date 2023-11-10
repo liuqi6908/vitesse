@@ -1,0 +1,17 @@
+@font-face {
+  font-family: 'PingFang';
+  src: url('~/assets/fonts/PingFang_Normal.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'PingFang';
+  src: url('~/assets/fonts/PingFang_Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+.font-pingfang {
+  font-family: 'PingFang';
+}
