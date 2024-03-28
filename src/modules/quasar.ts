@@ -47,15 +47,10 @@ Notify.registerType('warn', {
   position: 'top',
   timeout: 3000,
 })
-Notify.registerType('normal', {
-  progress: true,
-  color: 'info',
-  position: 'top',
-  timeout: 3000,
-})
 Notify.registerType('loading', {
-  progress: false,
-  color: 'info',
+  spinner: true,
+  color: 'warning',
   position: 'top',
-  timeout: 1000,
+  timeout: 0,
+  group: false,
 })

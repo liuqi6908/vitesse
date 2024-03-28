@@ -1,11 +1,5 @@
 {
-  "extends": ["@antfu", "@unocss"],
-  "overrides": [
-    {
-      "files": ["*.vue"],
-      "rules": {
-        "unused-imports/no-unused-vars": "off"
-      }
-    }
+  "extends": [
+    "@antfu"
   ]
 }

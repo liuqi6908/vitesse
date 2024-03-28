@@ -10,9 +10,11 @@
     "customfav",
     "demi",
     "execa",
+    "fontawesome",
     "iconify",
     "intlify",
     "ISNOTNULL",
+    "mingcute",
     "minio",
     "NOTEXISTS",
     "NOTHAS",
@@ -24,9 +26,11 @@
     "pnpm",
     "PSWD",
     "QRCODE",
+    "shikiji",
     "sizecheck",
     "Streamable",
     "taze",
+    "typecheck",
     "unhead",
     "unocss",
     "unplugin",
@@ -35,11 +39,13 @@
     "vitepress",
     "Vitesse",
     "vitest",
-    "vueuse"
+    "vuejs",
+    "vueuse",
+    "webfont"
   ],
   "prettier.enable": false,
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
+    "source.fixAll.eslint": "explicit"
   },
   "files.associations": {
     "*.css": "postcss"

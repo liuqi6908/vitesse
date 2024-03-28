@@ -1,19 +1,16 @@
 import path from 'node:path'
-import { defineConfig, loadEnv } from 'vite'
+import process from 'node:process'
+import Unocss from 'unocss/vite'
 import Vue from '@vitejs/plugin-vue'
 import Pages from 'vite-plugin-pages'
-import generateSitemap from 'vite-ssg-sitemap'
+import { defineConfig, loadEnv } from 'vite'
 import Layouts from 'vite-plugin-vue-layouts'
-import Components from 'unplugin-vue-components/vite'
-import AutoImport from 'unplugin-auto-import/vite'
-import Markdown from 'unplugin-vue-markdown/vite'
+import generateSitemap from 'vite-ssg-sitemap'
 import VueMacros from 'unplugin-vue-macros/vite'
-import { VitePWA } from 'vite-plugin-pwa'
+import AutoImport from 'unplugin-auto-import/vite'
 import VueDevTools from 'vite-plugin-vue-devtools'
-import LinkAttributes from 'markdown-it-link-attributes'
-import Unocss from 'unocss/vite'
-import Shiki from 'markdown-it-shikiji'
 import WebfontDownload from 'vite-plugin-webfont-dl'
+import Components from 'unplugin-vue-components/vite'
 
 export default ({ mode }: any) => {
   process.env = {
@@ -27,14 +24,16 @@ export default ({ mode }: any) => {
     define: {
       'process.env': {},
     },
+
     server: {
       host: '0.0.0.0',
-      port: Number.parseInt((process.env.VITE_DEV_PORT as string) || '3333', 10),
+      port: Number.parseInt((process.env.VITE_DEV_PORT as string) || '3333'),
       proxy: {
         [process.env.VITE_API_BASE as string]: {
           target: process.env.VITE_DEV_PROXY_TARGET,
           changeOrigin: true,
           rewrite: path => path.replace(new RegExp(`^${process.env.VITE_API_BASE}`), ''),
+          secure: false,
         },
       },
     },
@@ -67,13 +66,13 @@ export default ({ mode }: any) => {
         imports: [
           'vue',
           'vue-router',
-          '@vueuse/head',
           '@vueuse/core',
         ],
-        dts: 'src/auto-imports.d.ts',
+        dts: 'src/types/auto-imports.d.ts',
         dirs: [
           'src/composables',
           'src/constants',
+          'src/utils',
         ],
         vueTemplate: true,
       }),
@@ -84,50 +83,15 @@ export default ({ mode }: any) => {
         extensions: ['vue', 'md'],
         // allow auto import and register components used in markdown
         include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
-        dts: 'src/components.d.ts',
+        dts: 'src/types/components.d.ts',
+        dirs: [
+          'src/components',
+        ],
       }),
 
       // https://github.com/antfu/unocss
       // see uno.config.ts for config
       Unocss(),
-
-      // https://github.com/unplugin/unplugin-vue-markdown
-      // Don't need this? Try vitesse-lite: https://github.com/antfu/vitesse-lite
-      Markdown({
-        wrapperClasses: 'prose prose-sm m-auto text-left',
-        headEnabled: true,
-        async markdownItSetup(md) {
-          md.use(LinkAttributes, {
-            matcher: (link: string) => /^https?:\/\//.test(link),
-            attrs: {
-              target: '_blank',
-              rel: 'noopener',
-            },
-          })
-          md.use(await Shiki({
-            defaultColor: false,
-            themes: {
-              light: 'vitesse-light',
-              dark: 'vitesse-dark',
-            },
-          }))
-        },
-      }),
-
-      // https://github.com/antfu/vite-plugin-pwa
-      VitePWA({
-        registerType: 'autoUpdate',
-        includeAssets: [process.env.VITE_APP_LOGO as string],
-        manifest: {
-          name: process.env.VITE_APP_NAME,
-          theme_color: '#ffffff',
-          icons: [
-            {
-              src: process.env.VITE_APP_LOGO as string,
-            },
-          ],
-        },
-      }),
 
       // https://github.com/feat-agency/vite-plugin-webfont-dl
       WebfontDownload(),
@@ -135,15 +99,6 @@ export default ({ mode }: any) => {
       // https://github.com/webfansplz/vite-plugin-vue-devtools
       VueDevTools(),
     ],
-
-    // https://github.com/vitest-dev/vitest
-    test: {
-      include: ['test/**/*.test.ts'],
-      environment: 'jsdom',
-      deps: {
-        inline: ['@vue', '@vueuse', 'vue-demi'],
-      },
-    },
 
     // https://github.com/antfu/vite-ssg
     ssgOptions: {
