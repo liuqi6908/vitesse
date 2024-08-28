@@ -1,5 +1,6 @@
 import path from 'node:path'
 import process from 'node:process'
+
 import Unocss from 'unocss/vite'
 import Vue from '@vitejs/plugin-vue'
 import Pages from 'vite-plugin-pages'
@@ -13,8 +14,16 @@ import WebfontDownload from 'vite-plugin-webfont-dl'
 import Components from 'unplugin-vue-components/vite'
 
 export default ({ mode }: any) => {
+  // 默认环境配置
+  const defaultEnv = {
+    VITE_PORT: '3000',
+    VITE_BASE: '/',
+    VITE_API_BASE: 'api',
+  }
+
   process.env = {
     ...process.env,
+    ...defaultEnv,
     ...loadEnv(mode, process.cwd()),
     VITE_MODE: mode,
   }
@@ -27,10 +36,10 @@ export default ({ mode }: any) => {
 
     server: {
       host: '0.0.0.0',
-      port: Number.parseInt(process.env.VITE_DEV_PORT || '3333'),
+      port: Number.parseInt(process.env.VITE_PORT!),
       proxy: {
         [process.env.VITE_API_BASE as string]: {
-          target: process.env.VITE_DEV_PROXY_TARGET,
+          target: process.env.VITE_PROXY_TARGET,
           changeOrigin: true,
           rewrite: path => path.replace(new RegExp(`^${process.env.VITE_API_BASE}`), ''),
           secure: false,
@@ -40,7 +49,7 @@ export default ({ mode }: any) => {
 
     resolve: {
       alias: {
-        '~/': `${path.resolve(__dirname, 'src')}/`,
+        '~': path.resolve(__dirname, 'src'),
       },
     },
 
@@ -113,8 +122,9 @@ export default ({ mode }: any) => {
     },
 
     ssr: {
-      // TODO: workaround until they support native ESM
-      noExternal: ['workbox-window'],
+      noExternal: [
+        'workbox-window',
+      ],
     },
   })
 }

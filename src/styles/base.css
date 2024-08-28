@@ -1,7 +1,7 @@
 /* styles.css */
 
 /* Reset some default browser styles */
-h1, h2, h3, h4, p, ul, li {
+h1, h2, h3, h4, h5, h6, p, ul, li {
   margin: 0;
   padding: 0;
 }
@@ -13,16 +13,25 @@ body,
   height: 100%;
   margin: 0;
   padding: 0;
-  overflow: hidden;
   font-size: 16px;
   line-height: 24px;
   font-weight: 400;
   font-family: 'PingFang';
+  color: var(--grey-9);
+}
+
+html {
+  overflow: auto;
+
+  @media (min-height: 600px) {
+    overflow-y: hidden;
+  }
 }
 
 body {
-  transform-origin: top left;
-  color: var(--grey-8);
+  min-width: 320px;
+  min-height: 600px;
+  overflow: hidden;
 }
 
 /* Styling for heading tags */

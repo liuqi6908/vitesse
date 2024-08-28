@@ -1,17 +1,15 @@
-<script setup lang="ts"></script>
+<script lang="ts" setup></script>
 
 <template>
   <div>
-    <div text-4xl>
-      <div i-mdi:vuejs inline-block />
-    </div>
+    <div i-mingcute:vue-fill inline-block size-8 />
     <p>
-      <a rel="noreferrer" href="https://github.com/liuqi6908/vitesse" target="_blank">
+      <a href="https://github.com/liuqi6908/vitesse" target="_blank">
         Vitesse
       </a>
     </p>
     <p>
-      <em text-sm opacity-75>
+      <em text-sm opacity-80>
         Vitesse 开发模版
       </em>
     </p>

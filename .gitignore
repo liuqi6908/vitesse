@@ -28,6 +28,7 @@ logs
 # docker
 .docker-vol
 docker-compose.yaml
+docker-compose.yml
 
 # vite-ssg
 .vite-ssg-dist

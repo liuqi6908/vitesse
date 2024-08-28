@@ -1,7 +1,5 @@
-<script setup lang="ts"></script>
+<script lang="ts" setup></script>
 
 <template>
-  <q-scroll-area full>
-    <RouterView min-w-500px />
-  </q-scroll-area>
+  <RouterView full />
 </template>
